@@ -5,6 +5,7 @@ using BetterRCompany.Patches;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
+using RealCompany.Patches;
 
 namespace BetterRCompany
 {
@@ -35,6 +36,8 @@ namespace BetterRCompany
             harmony.PatchAll(typeof(MainPlugin));
             harmony.PatchAll(typeof(MoonEventsPatch));
             harmony.PatchAll(typeof(GeneratingNumbers));
+            harmony.PatchAll(typeof(PlayerPatches));
+            harmony.PatchAll(typeof(EnemyPatches));
         }
 
         

@@ -13,57 +13,63 @@ namespace BetterRCompany.Patches
     {
         static void AnnounceEvent()
         {
-            switch (currentEventName)
+            try
             {
-                case "LandmineEvent":
-                    HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {LandmineMessages[GeneratingNumbers.GenRandomNumber.Next(0, LandmineMessages.Count())]}.");
-                    LandmineSpawnRate(RoundManager.Instance.currentLevel);
-                    break;
-                case "BrackenEvent":
-                    HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {BrackenMessages[GeneratingNumbers.GenRandomNumber.Next(0, BrackenMessages.Count())]}.");
-                    break;
-                case "TimeTravelEvent":
-                    HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {TimeTravelMessages[GeneratingNumbers.GenRandomNumber.Next(0, TimeTravelMessages.Count())]}.");
-                    timer = new Timer(MoonTimeTimer, null, 0, 10000);
-                    break;
-                case "CockroachPartyEvent":
-                    HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {CockroachPartyMessages[GeneratingNumbers.GenRandomNumber.Next(0, CockroachPartyMessages.Count())]}.");
-                    break;
-                case "ClownFiestaEvent":
-                    HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {ClownFiestaMessages[GeneratingNumbers.GenRandomNumber.Next(0, ClownFiestaMessages.Count())]}.");
-                    break;
-                case "FakeFreeRoamEvent":
-                    HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> Enjoy your hard-earned free day.");
-                    break;
-                case "RealFreeRoamEvent":
-                    HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> Enjoy your hard-earned free day.");
-                    break;
-                case "ArachnophobiaEvent":
-                    HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {ArachnophobiaMessages[GeneratingNumbers.GenRandomNumber.Next(0, ArachnophobiaMessages.Count())]}");
-                    break;
-                case "NutBlasterEvent":
-                    HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {NutBlasterMessages[GeneratingNumbers.GenRandomNumber.Next(0, NutBlasterMessages.Count())]}");
-                    ShotgunDeliver();
-                    break;
-                case "BankRollEvent":
-                    HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {BankRollMessages[GeneratingNumbers.GenRandomNumber.Next(0, BankRollMessages.Count())]}");
-                    if(currentPlanetName == "85 Rend" || currentPlanetName == "7 Dine" || currentPlanetName == "8 Titan")
-                        terminal.groupCredits += GeneratingNumbers.GenRandomNumber.Next(220, 341);
-                    else
-                        terminal.groupCredits += GeneratingNumbers.GenRandomNumber.Next(80, 221);
-                    terminal.SyncGroupCreditsServerRpc(terminal.groupCredits, terminal.numberOfItemsInDropship);
-                    HUDManager.Instance.AddTextToChatOnServer($"Romanian government gave you a small bonus for your Romanian Vlone. Your new balance is: {terminal.groupCredits}");
-                    break;
-                case "TaxEvent":
-                    HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {TaxMessages[GeneratingNumbers.GenRandomNumber.Next(0, TaxMessages.Count())]}");
-                    terminal.groupCredits = terminal.groupCredits - (terminal.groupCredits * 20) / 100;
-                    terminal.SyncGroupCreditsServerRpc(terminal.groupCredits, terminal.numberOfItemsInDropship);
-                    HUDManager.Instance.AddTextToChatOnServer($"Tax paid to the Polish Government. Your new balance is: {terminal.groupCredits}");
-                    break;
-                case "RandomTPEvent":
-                    HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {RandomTPMessages[GeneratingNumbers.GenRandomNumber.Next(0, RandomTPMessages.Count())]}");
-                    break;
-
+                Terminal terminal = FindObjectOfType<Terminal>();
+                switch (currentEventName)
+                {
+                    case "LandmineEvent":
+                        HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {LandmineMessages[GeneratingNumbers.GenRandomNumber.Next(0, LandmineMessages.Count())]}.");
+                        LandmineSpawnRate(RoundManager.Instance.currentLevel);
+                        break;
+                    case "BrackenEvent":
+                        HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {BrackenMessages[GeneratingNumbers.GenRandomNumber.Next(0, BrackenMessages.Count())]}.");
+                        break;
+                    case "TimeTravelEvent":
+                        HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {TimeTravelMessages[GeneratingNumbers.GenRandomNumber.Next(0, TimeTravelMessages.Count())]}.");
+                        timer = new Timer(MoonTimeTimer, null, 0, 10000);
+                        break;
+                    case "CockroachPartyEvent":
+                        HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {CockroachPartyMessages[GeneratingNumbers.GenRandomNumber.Next(0, CockroachPartyMessages.Count())]}.");
+                        break;
+                    case "ClownFiestaEvent":
+                        HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {ClownFiestaMessages[GeneratingNumbers.GenRandomNumber.Next(0, ClownFiestaMessages.Count())]}.");
+                        break;
+                    case "FakeFreeRoamEvent":
+                        HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> Enjoy your hard-earned free day.");
+                        break;
+                    case "RealFreeRoamEvent":
+                        HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> Enjoy your hard-earned free day.");
+                        break;
+                    case "ArachnophobiaEvent":
+                        HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {ArachnophobiaMessages[GeneratingNumbers.GenRandomNumber.Next(0, ArachnophobiaMessages.Count())]}");
+                        break;
+                    case "NutBlasterEvent":
+                        HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {NutBlasterMessages[GeneratingNumbers.GenRandomNumber.Next(0, NutBlasterMessages.Count())]}");
+                        ShotgunDeliver();
+                        break;
+                    case "BankRollEvent":
+                        HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {BankRollMessages[GeneratingNumbers.GenRandomNumber.Next(0, BankRollMessages.Count())]}");
+                        if (currentPlanetName == "85 Rend" || currentPlanetName == "7 Dine" || currentPlanetName == "8 Titan")
+                            terminal.groupCredits += GeneratingNumbers.GenRandomNumber.Next(220, 341);
+                        else
+                            terminal.groupCredits += GeneratingNumbers.GenRandomNumber.Next(80, 221);
+                        terminal.SyncGroupCreditsServerRpc(terminal.groupCredits, terminal.numberOfItemsInDropship);
+                        HUDManager.Instance.AddTextToChatOnServer($"Romanian government gave you a small bonus for your Romanian Vlone. Your new balance is: {terminal.groupCredits}");
+                        break;
+                    case "TaxEvent":
+                        HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {TaxMessages[GeneratingNumbers.GenRandomNumber.Next(0, TaxMessages.Count())]}");
+                        terminal.groupCredits = terminal.groupCredits - (terminal.groupCredits * 20) / 100;
+                        terminal.SyncGroupCreditsServerRpc(terminal.groupCredits, terminal.numberOfItemsInDropship);
+                        HUDManager.Instance.AddTextToChatOnServer($"Tax paid to the Polish Government. Your new balance is: {terminal.groupCredits}");
+                        break;
+                    case "RandomTPEvent":
+                        HUDManager.Instance.AddTextToChatOnServer($"<color=yellow>[The Company]:</color> {RandomTPMessages[GeneratingNumbers.GenRandomNumber.Next(0, RandomTPMessages.Count())]}");
+                        break;
+                }
+            }catch(Exception e)
+            {
+                mls.LogError(e);
             }
         }
 
@@ -110,55 +116,73 @@ namespace BetterRCompany.Patches
 
         static void MoonTimeTimer(object state)
         {
-            if (EventActive == true && currentEventName == "TimeTravelEvent" && StartOfRound.Instance.shipHasLanded)
+            try
             {
-                if (GeneratingNumbers.GenRandomNumber.Next(0, 2) == 0)
-                    TimeOfDay.Instance.globalTimeSpeedMultiplier = 4.5f;
-                else
-                    TimeOfDay.Instance.globalTimeSpeedMultiplier = -2.2f;
+                if (EventActive == true && currentEventName == "TimeTravelEvent" && StartOfRound.Instance.shipHasLanded)
+                {
+                    if (GeneratingNumbers.GenRandomNumber.Next(0, 2) == 0)
+                        TimeOfDay.Instance.globalTimeSpeedMultiplier = 4.5f;
+                    else
+                        TimeOfDay.Instance.globalTimeSpeedMultiplier = -2.2f;
+                }
+            }catch(Exception e)
+            {
+                mls.LogError(e);
             }
         }
 
         static void LandmineSpawnRate(SelectableLevel currentPlayingLevel)
         {
-            if (EventActive == true && currentEventName == "LandmineEvent")
+            try
             {
-                AnimationCurve LandmineNumberToSpawn = new AnimationCurve(new Keyframe[]
+                if (EventActive == true && currentEventName == "LandmineEvent")
                 {
-                    new Keyframe(0f, 150f),
-                    new Keyframe(1f, 50f)
-                });
-                foreach (SpawnableMapObject spawnableObject in currentPlayingLevel.spawnableMapObjects)
-                {
-                    Landmine LandmineComponent = spawnableObject.prefabToSpawn.GetComponentInChildren<Landmine>();
-                    if (LandmineComponent != null && (LandmineComponent.name == spawnableObject.prefabToSpawn.name))
+                    AnimationCurve LandmineNumberToSpawn = new AnimationCurve(new Keyframe[]
                     {
-                        spawnableObject.numberToSpawn = LandmineNumberToSpawn;
+                        new Keyframe(0f, 150f),
+                        new Keyframe(1f, 50f)
+                    });
+                    foreach (SpawnableMapObject spawnableObject in currentPlayingLevel.spawnableMapObjects)
+                    {
+                        Landmine LandmineComponent = spawnableObject.prefabToSpawn.GetComponentInChildren<Landmine>();
+                        if (LandmineComponent != null && (LandmineComponent.name == spawnableObject.prefabToSpawn.name))
+                        {
+                            spawnableObject.numberToSpawn = LandmineNumberToSpawn;
+                        }
                     }
                 }
+            }catch(Exception e)
+            {
+                mls.LogError(e);
             }
         }
 
         static async void RandomlyTPPlayers()
         {
-            if (EventActive && currentEventName == "RandomTPEvent")
+            try
             {
-                var MyEnemyVents = FindObjectsOfType<EnemyVent>();
-                foreach (PlayerControllerB player in StartOfRound.Instance.allPlayerScripts)
+                if (EventActive && currentEventName == "RandomTPEvent")
                 {
-                    if (player.isPlayerControlled)
+                    var MyEnemyVents = FindObjectsOfType<EnemyVent>();
+                    foreach (PlayerControllerB player in StartOfRound.Instance.allPlayerScripts)
                     {
-                        player.beamUpParticle.Play();
-                        await Task.Delay(1700);
-                        player.isInsideFactory = true;
-                        player.DropAllHeldItems();
-                        player.transform.position = new Vector3(MyEnemyVents[GeneratingNumbers.GenRandomNumber.Next(0, MyEnemyVents.Count())].floorNode.position.x,
-                                                                MyEnemyVents[GeneratingNumbers.GenRandomNumber.Next(0, MyEnemyVents.Count())].floorNode.position.y,
-                                                                MyEnemyVents[GeneratingNumbers.GenRandomNumber.Next(0, MyEnemyVents.Count())].floorNode.position.z);
-                        player.beamOutBuildupParticle.Play();
-                        player.beamOutParticle.Play();
+                        if (player.isPlayerControlled)
+                        {
+                            player.beamUpParticle.Play();
+                            await Task.Delay(1700);
+                            player.isInsideFactory = true;
+                            player.DropAllHeldItems();
+                            player.transform.position = new Vector3(MyEnemyVents[GeneratingNumbers.GenRandomNumber.Next(0, MyEnemyVents.Count())].floorNode.position.x,
+                                                                    MyEnemyVents[GeneratingNumbers.GenRandomNumber.Next(0, MyEnemyVents.Count())].floorNode.position.y,
+                                                                    MyEnemyVents[GeneratingNumbers.GenRandomNumber.Next(0, MyEnemyVents.Count())].floorNode.position.z);
+                            player.beamOutBuildupParticle.Play();
+                            player.beamOutParticle.Play();
+                        }
                     }
                 }
+            }catch(Exception e)
+            {
+                mls.LogError(e);
             }
         }
 
@@ -166,24 +190,37 @@ namespace BetterRCompany.Patches
         [HarmonyPostfix]
         static void ItemDropShipLeave()
         {
-            if(EventActive && currentEventName == "NutBlasterEvent")
+            try
             {
-                
-                List<Item> list = terminal.buyableItemsList.ToList<Item>();
-                list.Remove(MyShotgun);
-                list.Remove(ShotgunAmmo);
-                terminal.buyableItemsList = list.ToArray();
+                if(EventActive && currentEventName == "NutBlasterEvent")
+                {
+                    Terminal terminal = FindObjectOfType<Terminal>();
+                    List<Item> list = terminal.buyableItemsList.ToList<Item>();
+                    list.Remove(MyShotgun);
+                    list.Remove(ShotgunAmmo);
+                    terminal.buyableItemsList = list.ToArray();
+                }
+            }catch (Exception e)
+            {
+                mls.LogError(e);
             }
         }
 
-        [HarmonyPatch(typeof(EnemyAI), "KillEnemy")]
+        [HarmonyPatch(typeof(EnemyAI), "KillEnemyServerRpc")]
         [HarmonyPostfix]
         static void EnemyBounty(EnemyAI __instance)
         {
-            if (EventActive && __instance.enemyType.isOutsideEnemy == false)
+            try
             {
-                terminal.groupCredits += 30;
-                terminal.SyncGroupCreditsServerRpc(terminal.groupCredits, terminal.numberOfItemsInDropship);
+                if (EventActive && __instance.enemyType.isOutsideEnemy == false)
+                {
+                    Terminal terminal = FindObjectOfType<Terminal>();
+                    terminal.groupCredits += 30;
+                    terminal.SyncGroupCreditsServerRpc(terminal.groupCredits, terminal.numberOfItemsInDropship);
+                }
+            }catch(Exception e)
+            {
+                mls.LogError(e);
             }
         }
 
@@ -220,7 +257,13 @@ namespace BetterRCompany.Patches
         [HarmonyPostfix]
         static void OpenDoors(StartOfRound __instance)
         {
-            RandomlyTPPlayers();
+            try
+            {
+                RandomlyTPPlayers();
+            }catch(Exception e)
+            {
+                mls.LogInfo(e);
+            }
         }
 
         [HarmonyPatch(typeof(RoundManager), "SpawnScrapInLevel")]
@@ -260,6 +303,12 @@ namespace BetterRCompany.Patches
                 currentPlanetName = __instance.currentLevel.PlanetName;
                 if (currentPlanetName == "71 Gordion")
                     return;
+                AnimationCurve _EnemyChances = new AnimationCurve(new Keyframe[]
+                {
+                        new Keyframe(0f, 100f),
+                });
+                __instance.currentLevel.enemySpawnChanceThroughoutDay = _EnemyChances;
+                currentEventName = "";
                 double eventRoll = GeneratingNumbers.EventChanceRoll();
                 if (eventRoll <= currentChance)
                 {
@@ -272,6 +321,22 @@ namespace BetterRCompany.Patches
                             currentEventName = myEvent.Value;
                         }
                     }
+                    if(currentEventName == "BrackenEvent" || currentEventName == "CockroachPartyEvent" || currentEventName == "FakeFreeRoamEvent")
+                    {
+                        AnimationCurve EnemyChances = new AnimationCurve(new Keyframe[]
+                        {
+                        new Keyframe(0f, 0f),
+                        });
+                        __instance.currentLevel.enemySpawnChanceThroughoutDay = EnemyChances;
+                    }
+                    else
+                    {
+                        AnimationCurve EnemyChances = new AnimationCurve(new Keyframe[]
+                        {
+                        new Keyframe(0f, 100f),
+                        });
+                        __instance.currentLevel.enemySpawnChanceThroughoutDay = EnemyChances;
+                    }
                     AnnounceEvent();
                 }
             }
@@ -281,51 +346,63 @@ namespace BetterRCompany.Patches
             }
         }
 
-        [HarmonyPatch(typeof(RoundManager), "SpawnEnemyFromVent")]
+        [HarmonyPatch(typeof(RoundManager), "SpawnEnemyOnServer")]
         [HarmonyPrefix]
         static void StopEnemySpawnOnEvent(RoundManager __instance)
         {
-            if (EventActive && (currentEventName == "BrackenEvent" || currentEventName == "CockroachPartyEvent" || currentEventName == "FakeFreeRoamEvent"))
-                return;
+            try
+            {
+                if (EventActive && (currentEventName == "BrackenEvent" || currentEventName == "CockroachPartyEvent" || currentEventName == "FakeFreeRoamEvent"))
+                    return;
+            }catch(Exception e)
+            {
+                mls.LogError(e);
+            }
         }
 
         [HarmonyPatch(typeof(RoundManager), "RefreshEnemyVents")]
         [HarmonyPostfix]
         static void SpawnEventEnemies(RoundManager __instance)
         {
-            EnemyVents = FindObjectsOfType<EnemyVent>();
-            if(EventActive)
+            try
             {
-                for(int j = 0; j < __instance.currentLevel.Enemies.Count; j++)
+                EnemyVents = FindObjectsOfType<EnemyVent>();
+                if(EventActive)
                 {
-                    if (__instance.currentLevel.Enemies[j].enemyType.enemyName == "Flowerman")
-                        BrackenIndex = j;
-                    if (__instance.currentLevel.Enemies[j].enemyType.enemyName == "Hoarding bug")
-                        HoardingBugIndex = j;
-                    if (__instance.currentLevel.Enemies[j].enemyType.enemyName == "Bunker Spider")
-                        BunkerSpiderIndex = j;
+                    for(int j = 0; j < __instance.currentLevel.Enemies.Count; j++)
+                    {
+                        if (__instance.currentLevel.Enemies[j].enemyType.enemyName == "Flowerman")
+                            BrackenIndex = j;
+                        if (__instance.currentLevel.Enemies[j].enemyType.enemyName == "Hoarding bug")
+                            HoardingBugIndex = j;
+                        if (__instance.currentLevel.Enemies[j].enemyType.enemyName == "Bunker Spider")
+                            BunkerSpiderIndex = j;
+                    }
+                    foreach(EnemyVent ExistingVent in EnemyVents)
+                    {
+                        if(currentEventName == "BrackenEvent")
+                        {
+                            __instance.SpawnEnemyGameObject(ExistingVent.floorNode.position, ExistingVent.floorNode.eulerAngles.y, BrackenIndex);
+                        }
+                        if(currentEventName == "CockroachPartyEvent")
+                        {
+                            for(int i = 0; i < 2; i++)
+                                __instance.SpawnEnemyGameObject(ExistingVent.floorNode.position, ExistingVent.floorNode.eulerAngles.y, HoardingBugIndex);
+                        }
+                        if(currentEventName == "ArachnophobiaEvent")
+                        {
+                            __instance.SpawnEnemyGameObject(ExistingVent.floorNode.position, ExistingVent.floorNode.eulerAngles.y, BunkerSpiderIndex);
+                        }
+                        if(currentEventName == "FakeFreeRoamEvent")
+                        {
+                            __instance.SpawnEnemyGameObject(ExistingVent.floorNode.position, ExistingVent.floorNode.eulerAngles.y, BrackenIndex);
+                            break;
+                        }
+                    }
                 }
-                foreach(EnemyVent ExistingVent in EnemyVents)
-                {
-                    if(currentEventName == "BrackenEvent")
-                    {
-                        __instance.SpawnEnemyGameObject(ExistingVent.floorNode.position, ExistingVent.floorNode.eulerAngles.y, BrackenIndex);
-                    }
-                    if(currentEventName == "CockroachPartyEvent")
-                    {
-                        for(int i = 0; i < 2; i++)
-                            __instance.SpawnEnemyGameObject(ExistingVent.floorNode.position, ExistingVent.floorNode.eulerAngles.y, HoardingBugIndex);
-                    }
-                    if(currentEventName == "ArachnophobiaEvent")
-                    {
-                        __instance.SpawnEnemyGameObject(ExistingVent.floorNode.position, ExistingVent.floorNode.eulerAngles.y, BunkerSpiderIndex);
-                    }
-                    if(currentEventName == "FakeFreeRoamEvent")
-                    {
-                        __instance.SpawnEnemyGameObject(ExistingVent.floorNode.position, ExistingVent.floorNode.eulerAngles.y, BrackenIndex);
-                        break;
-                    }
-                }
+            }catch(Exception e)
+            {
+                mls.LogError(e);
             }
         }
     }

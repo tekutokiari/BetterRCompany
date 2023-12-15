@@ -14,7 +14,7 @@ namespace BetterRCompany
     {
         private const string modGUID = "BetterRCompany.Teku";
         private const string modName = "BetterRCompany";
-        private const string modVersion = "1.0.0";
+        private const string modVersion = "1.1.0";
 
         private readonly Harmony harmony = new Harmony(modGUID);
 
@@ -357,7 +357,6 @@ namespace BetterRCompany
             },
         };
 
-        public static Terminal terminal = FindObjectOfType<Terminal>();
         public static Item ShotgunAmmo;
         public static Item MyShotgun;
         public static bool EventActive = false;
